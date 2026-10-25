@@ -1,0 +1,58 @@
+LOAN RISK ASSESSMENT SYSTEM - MODEL EVALUATION RESULTS
+Dataset: Loan_default.csv
+=======================================================
+
+Total rows in dataset : 255347
+Duplicate rows removed: 0
+Training rows         : 204277
+Testing rows          : 51070
+
+MODEL COMPARISON (Logistic Regression vs Random Forest vs XGBoost)
+------------------------------------------------------------------------------
+Model                   Accuracy  Precision   Recall  F1-Score   ROC-AUC
+Random Forest             0.7378     0.2489   0.6233    0.3557    0.7557  <-- BEST
+XGBoost                   0.7210     0.2374   0.6340    0.3455    0.7499
+Logistic Regression       0.6764     0.2195   0.6990    0.3341    0.7532
+
+Best model selected: Random Forest (highest F1-score)
+
+BEST MODEL METRICS (Random Forest)
+----------------------------------------
+Accuracy  : 0.7378
+Precision : 0.2489
+Recall    : 0.6233
+F1-Score  : 0.3557
+ROC-AUC   : 0.7557
+
+Confusion Matrix (rows = actual, cols = predicted):
+                 Predicted No-Def  Predicted Default
+Actual No-Def    33982              11157
+Actual Default   2234               3697
+
+Classification Report:
+              precision    recall  f1-score   support
+
+  No Default       0.94      0.75      0.84     45139
+     Default       0.25      0.62      0.36      5931
+
+    accuracy                           0.74     51070
+   macro avg       0.59      0.69      0.60     51070
+weighted avg       0.86      0.74      0.78     51070
+
+Feature Importance (grouped, Random Forest):
+  Age: 0.2321
+  InterestRate: 0.1710
+  Income: 0.1429
+  MonthsEmployed: 0.1023
+  LoanAmount: 0.1005
+  CreditScore: 0.0527
+  DTIRatio: 0.0400
+  EmploymentType: 0.0254
+  LoanPurpose: 0.0235
+  Education: 0.0213
+  MaritalStatus: 0.0170
+  NumCreditLines: 0.0158
+  LoanTerm: 0.0151
+  HasCoSigner: 0.0150
+  HasDependents: 0.0143
+  HasMortgage: 0.0113

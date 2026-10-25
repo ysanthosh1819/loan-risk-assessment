@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block title %}Model Performance | Loan Risk Assessment System{% endblock %}
+{% block content %}
+
+<section class="performance-section">
+    <h1>Model Performance</h1>
+    <p class="section-subtitle">
+        Evaluated on {{ results.test_rows }} test records out of {{ results.total_rows }} total records
+        ({{ results.train_rows }} used for training).
+    </p>
+    <p class="section-subtitle">
+        Three algorithms were trained and compared — Logistic Regression, Random Forest, and XGBoost.
+        <strong>{{ results.best_model }}</strong> was automatically selected as the best model
+        (highest F1-score) and is the one used for predictions below.
+    </p>
+
+    <div class="metrics-grid">
+        <div class="metric-card">
+            <p class="metric-value">{{ "%.2f"|format(results.accuracy * 100) }}%</p>
+            <p class="metric-label">Accuracy</p>
+            <p class="metric-desc">Overall correct predictions</p>
+        </div>
+        <div class="metric-card">
+            <p class="metric-value">{{ "%.2f"|format(results.precision * 100) }}%</p>
+            <p class="metric-label">Precision</p>
+            <p class="metric-desc">Reliability of High Risk predictions</p>
+        </div>
+        <div class="metric-card">
+            <p class="metric-value">{{ "%.2f"|format(results.recall * 100) }}%</p>
+            <p class="metric-label">Recall</p>
+            <p class="metric-desc">Actual High Risk applicants detected</p>
+        </div>
+        <div class="metric-card">
+            <p class="metric-value">{{ "%.2f"|format(results.f1_score * 100) }}%</p>
+            <p class="metric-label">F1-Score</p>
+            <p class="metric-desc">Balance of precision and recall</p>
+        </div>
+    </div>
+
+    <div class="graphs-grid">
+        <div class="graph-card">
+            <h3>Model Comparison (Logistic Regression vs Random Forest vs XGBoost)</h3>
+            <img src="{{ url_for('static', filename='images/model_comparison.png') }}" alt="Model Comparison">
+        </div>
+        <div class="graph-card">
+            <h3>Confusion Matrix ({{ results.best_model }})</h3>
+            <img src="{{ url_for('static', filename='images/confusion_matrix.png') }}" alt="Confusion Matrix">
+        </div>
+        <div class="graph-card">
+            <h3>Feature Importance</h3>
+            <img src="{{ url_for('static', filename='images/feature_importance.png') }}" alt="Feature Importance">
+        </div>
+        <div class="graph-card">
+            <h3>Target Class Distribution</h3>
+            <img src="{{ url_for('static', filename='images/target_distribution.png') }}" alt="Target Distribution">
+        </div>
+        <div class="graph-card">
+            <h3>Numerical Feature Distributions</h3>
+            <img src="{{ url_for('static', filename='images/numerical_distributions.png') }}" alt="Numerical Distributions">
+        </div>
+        <div class="graph-card">
+            <h3>Risk vs Numerical Features</h3>
+            <img src="{{ url_for('static', filename='images/risk_vs_numerical.png') }}" alt="Risk vs Numerical Features">
+        </div>
+        <div class="graph-card">
+            <h3>Risk vs Categorical Features</h3>
+            <img src="{{ url_for('static', filename='images/risk_vs_categorical.png') }}" alt="Risk vs Categorical Features">
+        </div>
+        <div class="graph-card">
+            <h3>Correlation Heatmap</h3>
+            <img src="{{ url_for('static', filename='images/correlation_heatmap.png') }}" alt="Correlation Heatmap">
+        </div>
+    </div>
+</section>
+
+{% endblock %}

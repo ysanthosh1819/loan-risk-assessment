@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Home | Loan Risk Assessment System{% endblock %}
+{% block content %}
+
+<section class="hero">
+    <h1>Loan Risk Assessment System</h1>
+    <p class="hero-subtitle">
+        A Machine Learning based system that analyzes loan applicant information
+        and predicts whether an applicant is <strong>Low Risk</strong> or <strong>High Risk</strong>,
+        using the best of three trained algorithms (Logistic Regression, Random Forest, and XGBoost) selected by F1-score on historical loan data.
+    </p>
+
+    {% if not model_ready %}
+    <div class="flash flash-error" style="max-width:600px;margin:20px auto;">
+        Model not trained yet. Run <code>python train_model.py</code> from the project folder first.
+    </div>
+    {% endif %}
+
+    <div class="hero-actions">
+        <a href="{{ url_for('predict') }}" class="btn btn-primary">Predict Loan Risk</a>
+        <a href="{{ url_for('performance') }}" class="btn btn-secondary">Model Performance</a>
+        <a href="{{ url_for('about') }}" class="btn btn-secondary">About Project</a>
+    </div>
+</section>
+
+<section class="card-grid">
+    <div class="card">
+        <h3>Data-Driven</h3>
+        <p>Trained on real applicant records including income, credit score, loan amount, employment, and existing debt.</p>
+    </div>
+    <div class="card">
+        <h3>Best-of-Three Model</h3>
+        <p>Logistic Regression, Random Forest, and XGBoost are trained and compared; the highest F1-score model is deployed automatically.</p>
+    </div>
+    <div class="card">
+        <h3>Instant Prediction</h3>
+        <p>Enter applicant details and get an immediate Low Risk / High Risk prediction with probability.</p>
+    </div>
+</section>
+
+{% endblock %}

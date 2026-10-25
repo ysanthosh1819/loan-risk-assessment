@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Result | Loan Risk Assessment System{% endblock %}
+{% block content %}
+
+<section class="result-section">
+    <h1>Loan Risk Assessment Result</h1>
+
+    <div class="result-card {{ 'result-high' if result.prediction == 'High Risk' else 'result-low' }}">
+        <p class="result-label">Risk Prediction</p>
+        <h2 class="result-value">{{ result.prediction.upper() }}</h2>
+        <p class="result-probability">
+            High Risk Probability: <strong>{{ result.high_risk_probability }}%</strong>
+            &nbsp;|&nbsp;
+            Low Risk Probability: <strong>{{ result.low_risk_probability }}%</strong>
+        </p>
+    </div>
+
+    <p class="disclaimer">
+        Note: This is an ML-based prediction generated for academic demonstration purposes.
+        It is not an actual financial or loan approval decision.
+    </p>
+
+    <div class="summary-card">
+        <h3>Applicant Information Summary</h3>
+        <table class="summary-table">
+            {% for field, value in applicant.items() %}
+            <tr>
+                <td class="summary-label">{{ field_labels.get(field, field) }}</td>
+                <td class="summary-value">{{ value }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div class="hero-actions">
+        <a href="{{ url_for('predict') }}" class="btn btn-primary">Assess Another Applicant</a>
+        <a href="{{ url_for('home') }}" class="btn btn-secondary">Back to Home</a>
+    </div>
+</section>
+
+{% endblock %}

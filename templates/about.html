@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}About | Loan Risk Assessment System{% endblock %}
+{% block content %}
+
+<section class="about-section">
+    <h1>About This Project</h1>
+
+    <div class="about-card">
+        <h3>Abstract</h3>
+        <p>
+            Loan approval is an important process in banks and financial institutions. Before approving a loan,
+            financial institutions need to analyze whether the applicant is capable of repaying the loan.
+            This project is a Machine Learning based Loan Risk Assessment System that analyzes applicant
+            information such as income, age, credit score, loan amount, employment type, and existing debt
+            to classify applicants as <strong>Low Risk (no predicted default)</strong> or
+            <strong>High Risk (predicted default)</strong>.
+        </p>
+    </div>
+
+    <div class="about-card">
+        <h3>Methodology</h3>
+        <ol>
+            <li><strong>Data Collection</strong> &mdash; A dataset of 255,347 loan applicant records (Loan_default.csv) is used.</li>
+            <li><strong>Data Preprocessing</strong> &mdash; Checking for missing values, duplicates, and encoding categorical data.</li>
+            <li><strong>Feature Selection</strong> &mdash; Choosing meaningful predictive features and excluding identifiers.</li>
+            <li><strong>Train-Test Split</strong> &mdash; 80% of data used for training, 20% for testing (stratified).</li>
+            <li><strong>Model Training</strong> &mdash; Three algorithms (Logistic Regression, Random Forest, XGBoost) are trained on the processed data and compared.</li>
+            <li><strong>Model Selection</strong> &mdash; The algorithm with the highest F1-score on the test set is automatically selected and saved for predictions.</li>
+            <li><strong>Model Evaluation</strong> &mdash; Accuracy, Precision, Recall, F1-Score, and Confusion Matrix.</li>
+            <li><strong>Risk Prediction</strong> &mdash; The trained model predicts risk for new applicants via the web app.</li>
+        </ol>
+    </div>
+
+    <div class="about-card">
+        <h3>Technology Used</h3>
+        <p>Python, Pandas, NumPy, Scikit-learn, Matplotlib, Seaborn, Joblib, Flask, HTML, CSS.</p>
+    </div>
+
+    <div class="about-card">
+        <h3>Team</h3>
+        <p>
+            K. Sarvana Dattha (24B11AI176) &middot;
+            R. Ayyappa (24B11AI361) &middot;
+            Shaik. Rizwan (24B11AI396) &middot;
+            Y. Santhosh (24B11AI472)
+            <br>Department of Artificial Intelligence and Machine Learning
+        </p>
+    </div>
+</section>
+
+{% endblock %}

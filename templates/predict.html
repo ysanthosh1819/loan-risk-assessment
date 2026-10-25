@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Predict Risk | Loan Risk Assessment System{% endblock %}
+{% block content %}
+
+<section class="form-section">
+    <h1>Applicant Information</h1>
+    <p class="section-subtitle">Enter the applicant's details below to predict loan risk.</p>
+
+    <form method="POST" action="{{ url_for('predict') }}" class="applicant-form">
+        <div class="form-grid">
+            {% for field in numerical_features %}
+            <div class="form-group">
+                <label for="{{ field }}">{{ field_labels[field] }}</label>
+                <input
+                    type="number"
+                    step="any"
+                    id="{{ field }}"
+                    name="{{ field }}"
+                    value="{{ form_values.get(field, '') }}"
+                    required
+                >
+            </div>
+            {% endfor %}
+
+            {% for field in categorical_features %}
+            <div class="form-group">
+                <label for="{{ field }}">{{ field_labels[field] }}</label>
+                <select id="{{ field }}" name="{{ field }}" required>
+                    <option value="" disabled {{ 'selected' if not form_values.get(field) }}>Select {{ field_labels[field] }}</option>
+                    {% for option in dropdown_options[field] %}
+                    <option value="{{ option }}" {{ 'selected' if form_values.get(field) == option }}>
+                        {{ option.replace('_', ' ') }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            {% endfor %}
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-large">Predict Risk</button>
+    </form>
+</section>
+
+{% endblock %}
